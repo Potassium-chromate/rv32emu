@@ -1,1 +1,1 @@
-export PATH=/home/eason/rv32emu/tests/system/playground/bin:$PATH
+export PATH=/home/eason/rv32emu/tests/system/playground/bin:\ATH

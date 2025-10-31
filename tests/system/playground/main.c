@@ -26,6 +26,7 @@
 typedef uint8_t uf8;
 extern uint64_t get_cycles(void);
 extern uint64_t get_instret(void);
+extern void hanoi(void);
 uf8 uf8_encode(uint32_t value);
 uint32_t uf8_decode(uf8 fl);
 
@@ -188,11 +189,13 @@ int main(void)
     uint64_t start_cycles, end_cycles, cycles_elapsed;
     uint64_t start_instret, end_instret, instret_elapsed;
 
-    TEST_LOGGER("\n=== ChaCha20 Tests ===\n\n");
+    TEST_LOGGER("\n=== Tests ===\n\n");
 
     if (test()) {
         TEST_LOGGER("All tests passed.\n");
     }
+    
+    hanoi();
     
     TEST_LOGGER("\n=== All Tests Completed ===\n");
 

@@ -18,8 +18,10 @@ OBJDUMP = $(CROSS_COMPILE)objdump
 SHELL := /bin/bash
 CURRENT_DIR = $(shell pwd)
 RISCV_DIR := $(HOME)/riscv-none-elf-gcc
+SETENV := $(HOME)/riscv-none-elf-gcc/setenv
+export PATH := $(RISCV_DIR)/bin:$(PATH)
 
-OBJS = start.o main.o perfcounter.o chacha20_asm.o uf8.o
+OBJS = start.o main.o perfcounter.o chacha20_asm.o uf8.o hanoi.o
 
 .PHONY: all run dump clean
 
@@ -45,11 +47,3 @@ dump: $(EXEC)
 
 clean:
 	rm -f $(EXEC) $(OBJS)
-
-init:
-	@echo "Setting up RISC-V toolchain environment..."
-	cd $(RISCV_DIR)
-	@echo "export PATH=$$(pwd)/bin:\$$PATH" > setenv
-	source setenv
-	cd $(CURRENT_DIR)
-	gcc version 14.2.0 (xPack GNU RISC-V Embedded GCC x86_64)
