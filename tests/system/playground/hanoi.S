@@ -200,6 +200,105 @@ finish_game:
 	
 .size hanoi,.-hanoi
 
+
+.globl  hanoi_improve
+
+hanoi_improve:
+	addi sp, sp, -20
+	sw a0, 0(sp)   #int n
+	sw a1, 4(sp)   #from_pillar
+	sw a2, 8(sp)   #to_pillar
+	sw a3, 12(sp)  #aux_pillar
+	sw ra, 16(sp)
+	 
+	li a4, 1
+	bne a0, a4, beq_flag1
+	jal ra, print_disk_move
+	
+	lw ra, 16(sp)
+	addi sp, sp, 20
+	ret
+	
+beq_flag1:
+	lw a0, 0(sp)   #int n
+	addi a0, a0, -1
+	lw a1, 4(sp)   #from_pillar
+	lw a2, 12(sp)  #to_pillar -> aux_pillar
+	lw a3, 8(sp)   #aux_pillar -> to_pillar
+	jal ra, hanoi_improve
+	jal ra, print_disk_move
+	
+	lw a0, 0(sp)    #int n
+	addi a0, a0, -1
+	lw a1, 12(sp)   #from_pillar -> aux_pillar
+	lw a2, 8(sp)    #to_pillar
+	lw a3, 4(sp)    #aux_pillar -> from_pillar
+	jal ra, hanoi_improve
+	
+	lw x1, 16(sp)
+	addi sp, sp, 20
+	ret
+
+.size hanoi_improve,.-hanoi_improve
+
+print_disk_move:
+	# "Move Disk "
+	li 		a0, 1
+	la 		a1, str1
+	li 		a2, 10
+	li 		a7, 64
+	ecall
+	
+	# Disk number
+	lw 		a0, 0(sp)
+	addi    a1, sp, -1
+	addi    a0, a0, '0'
+	sb      a0, 0(a1)
+	li 		a0, 1
+	li 		a2, 1
+	ecall
+
+
+	# " from "
+	li 		a0, 1
+	la 		a1, str2
+	li 		a2, 6
+	li 		a7, 64
+	ecall
+	
+	# from_pillar name
+	lw 		a0, 4(sp)
+	addi    a1, sp, -1
+	addi    a0, a0, 0
+	sb      a0, 0(a1)
+	li 		a0, 1
+	li 		a2, 1
+	ecall
+	
+	# " to "
+	li 		a0, 1
+	la 		a1, str3
+	li 		a2, 4
+	ecall
+	
+	# to_pillar name
+	lw 		a0, 8(sp)
+	addi    a1, sp, -1
+	addi    a0, a0, 0
+	sb      a0, 0(a1)
+	li 		a0, 1
+	li 		a2, 1
+	ecall
+	
+	# "\n"
+	li 		a0, 1
+	la 		a1, str4
+	li  	a2, 1
+	ecall
+	
+	ret
+.size print_disk_move,.-print_disk_move
+
 .data
 	obdata:     .byte   0x3c, 0x3b, 0x3a
 	str1:       .asciz  "Move Disk "
