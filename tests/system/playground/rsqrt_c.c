@@ -1,5 +1,8 @@
 #include <stdint.h>
 #include "print.h"
+
+extern uint32_t newton_step_asm(uint16_t *rec_inv_sqrt, uint16_t x);
+
 #define REC_INV_SQRT_CACHE (16)
 static const uint16_t inv_sqrt_cache[REC_INV_SQRT_CACHE] = {
     65535, 65535, 46340, 37837,
@@ -58,9 +61,10 @@ uint16_t rec_inv_sqrt(uint16_t x) {
 
     // 4) a couple of Newton iterations using the ORIGINAL x
     //    (orig_x is the actual value whose inverse sqrt we want)
-    newton_step(&y, orig_x);
-    newton_step(&y, orig_x);
-    newton_step(&y, orig_x);
+    newton_step_asm(&y, orig_x);
+    newton_step_asm(&y, orig_x);
+    newton_step_asm(&y, orig_x);
+    
     return y;
 }
 
