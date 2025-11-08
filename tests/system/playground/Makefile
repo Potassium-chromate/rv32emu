@@ -21,7 +21,7 @@ RISCV_DIR := $(HOME)/riscv-none-elf-gcc
 SETENV := $(HOME)/riscv-none-elf-gcc/setenv
 export PATH := $(RISCV_DIR)/bin:$(PATH)
 
-OBJS = start.o main.o perfcounter.o chacha20_asm.o uf8.o hanoi.o hanoi_c.o print.o
+OBJS = start.o main.o perfcounter.o chacha20_asm.o uf8.o hanoi.o hanoi_c.o rsqrt.o print.o
 
 .PHONY: all run dump clean
 

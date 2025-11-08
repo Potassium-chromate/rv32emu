@@ -12,6 +12,7 @@ extern void hanoi_c(int n, char *from_pillar, char *to_pillar, char *aux_pillar)
 extern void hanoi_improve(int n, char from_pillar, char to_pillar, char aux_pillar);
 extern uf8 uf8_encode(uint32_t value);
 extern uint32_t uf8_decode(uf8 fl);
+extern void run_rsqrt_test();
 
 static bool test(void)
 {
@@ -66,7 +67,8 @@ int main(void)
     
     //hanoi();
     //hanoi_c(3, "A", "C", "B");
-    hanoi_improve(3, 'A', 'C', 'B');
+    //hanoi_improve(3, 'A', 'C', 'B');
+    run_rsqrt_test();
     
     end_cycles = get_cycles();
     end_instret = get_instret();

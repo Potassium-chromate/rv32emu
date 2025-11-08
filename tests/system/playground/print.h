@@ -27,4 +27,8 @@
 void *memcpy(void *dest, const void *src, size_t n);
 void print_hex(unsigned long val);
 void print_dec(unsigned long val);
+uint32_t umul(uint32_t a, uint32_t b);
+unsigned long udiv(unsigned long dividend, unsigned long divisor);
+uint32_t __mulsi3(uint32_t a, uint32_t b);
+unsigned long umod(unsigned long dividend, unsigned long divisor);
 #endif

@@ -14,7 +14,7 @@ void *memcpy(void *dest, const void *src, size_t n)
 }
 
 /* Software division for RV32I (no M extension) */
-static unsigned long udiv(unsigned long dividend, unsigned long divisor)
+unsigned long udiv(unsigned long dividend, unsigned long divisor)
 {
     if (divisor == 0)
         return 0;
@@ -35,7 +35,7 @@ static unsigned long udiv(unsigned long dividend, unsigned long divisor)
     return quotient;
 }
 
-static unsigned long umod(unsigned long dividend, unsigned long divisor)
+unsigned long umod(unsigned long dividend, unsigned long divisor)
 {
     if (divisor == 0)
         return 0;
@@ -55,7 +55,7 @@ static unsigned long umod(unsigned long dividend, unsigned long divisor)
 }
 
 /* Software multiplication for RV32I (no M extension) */
-static uint32_t umul(uint32_t a, uint32_t b)
+uint32_t umul(uint32_t a, uint32_t b)
 {
     uint32_t result = 0;
     while (b) {
@@ -68,7 +68,7 @@ static uint32_t umul(uint32_t a, uint32_t b)
 }
 
 /* Provide __mulsi3 for GCC */
-static uint32_t __mulsi3(uint32_t a, uint32_t b)
+uint32_t __mulsi3(uint32_t a, uint32_t b)
 {
     return umul(a, b);
 }
