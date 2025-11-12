@@ -5,8 +5,9 @@ LINKER_SCRIPT = linker.ld
 
 EMU ?= ../../../build/rv32emu
 
+OP := -O1
 AFLAGS = -g $(ARCH)
-CFLAGS = -g -march=rv32i_zicsr
+CFLAGS = -g $(OP) -march=rv32i_zicsr
 LDFLAGS = -T $(LINKER_SCRIPT)
 EXEC = test.elf
 
@@ -44,6 +45,9 @@ run: $(EXEC)
 
 dump: $(EXEC)
 	$(OBJDUMP) -Ds $< | less
+
+disassemble:
+	$(OBJDUMP) -d test.elf > test_disassemble.txt
 
 clean:
 	rm -f $(EXEC) $(OBJS)
